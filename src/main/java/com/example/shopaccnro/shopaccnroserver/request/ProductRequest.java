@@ -12,7 +12,6 @@ public class ProductRequest {
     private String code;
     private String barcode;
     private String name;
-    private Integer server;
     private Integer register;
     private String planet;
     private String description;
@@ -25,5 +24,7 @@ public class ProductRequest {
     private Long productId;
     private Long categoryId;
     private String categoryName;
+    private Long serverId;
+    private String serverName;
 
 }

@@ -2,6 +2,7 @@ package com.example.shopaccnro.shopaccnroserver.service;
 
 import com.example.shopaccnro.shopaccnroserver.entity.Category;
 import com.example.shopaccnro.shopaccnroserver.entity.Product;
+import com.example.shopaccnro.shopaccnroserver.entity.Server;
 import com.example.shopaccnro.shopaccnroserver.repository.ProductPhotoRepository;
 import com.example.shopaccnro.shopaccnroserver.repository.ProductRepository;
 import com.example.shopaccnro.shopaccnroserver.request.ProductRequest;
@@ -43,8 +44,9 @@ public class ProductService {
         }
 
         // Set other product properties
-        product.setBarcode(productRequest.getBarcode());
         product.setName(productRequest.getName());
+        product.setPlanet(productRequest.getPlanet());
+        product.setRegister(productRequest.getRegister());
         product.setStatus(1);
 
         // Set category
@@ -52,6 +54,13 @@ public class ProductService {
             product.setCategory(Category.builder().id(productRequest.getCategoryId()).build());
         } else {
             product.setCategory(null);
+        }
+
+        // Set server
+        if (productRequest.getServerId() != null) {
+            product.setServer(Server.builder().id(productRequest.getServerId()).build());
+        } else {
+            product.setServer(null);
         }
 
         return productRepository.save(product);
@@ -73,15 +82,23 @@ public class ProductService {
         else {
             product.setCode(productRequest.getCode());
         }
-
-        product.setBarcode(productRequest.getBarcode());
+        ;
         product.setName(productRequest.getName());
+        product.setPlanet(productRequest.getPlanet());
+        product.setRegister(productRequest.getRegister());
 
         // Cập nhật danh mục
         if (productRequest.getCategoryId() != null) {
             product.setCategory(Category.builder().id(productRequest.getCategoryId()).build());
         } else {
             product.setCategory(null);
+        }
+
+        // Set server
+        if (productRequest.getServerId() != null) {
+            product.setServer(Server.builder().id(productRequest.getServerId()).build());
+        } else {
+            product.setServer(null);
         }
 
         // Lưu sản phẩm

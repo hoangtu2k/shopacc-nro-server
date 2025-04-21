@@ -30,11 +30,9 @@ public class ProductDetailRest {
                     ProductRequest productRequest = new ProductRequest();
                     productRequest.setId(productDetail.getId());
                     productRequest.setCode(productDetail.getProduct().getCode());
-                    productRequest.setBarcode(productDetail.getProduct().getBarcode());
                     productRequest.setName(productDetail.getProduct().getName());
                     productRequest.setPlanet(productDetail.getProduct().getPlanet());
                     productRequest.setRegister(productDetail.getProduct().getRegister());
-                    productRequest.setServer(productDetail.getProduct().getServer());
                     productRequest.setPrice(productDetail.getPrice());
                     productRequest.setDescription(productDetail.getProduct().getDescription());
                     productRequest.setStatus(productDetail.getProduct().getStatus());
@@ -47,6 +45,15 @@ public class ProductDetailRest {
                     } else {
                         productRequest.setCategoryId(null);
                         productRequest.setCategoryName(null);
+                    }
+
+                    // Set category details if available
+                    if (productDetail.getProduct().getServer() != null) {
+                        productRequest.setServerId(productDetail.getProduct().getServer().getId());
+                        productRequest.setServerName(productDetail.getProduct().getServer().getName());
+                    } else {
+                        productRequest.setServerId(null);
+                        productRequest.setServerName(null);
                     }
 
                     // Set main image and image URL

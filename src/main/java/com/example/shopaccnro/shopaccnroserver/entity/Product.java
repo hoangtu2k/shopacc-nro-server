@@ -20,9 +20,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String code;
-    private String barcode;
     private String name;
-    private Integer server;
     private Integer register;
     private String planet;
     private String description;
@@ -31,6 +29,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "server_id")
+    private Server server;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product")
