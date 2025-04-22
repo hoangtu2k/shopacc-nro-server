@@ -21,7 +21,7 @@ public class Product {
     private Long id;
     private String code;
     private String name;
-    private Integer register;
+    private String register;
     private String planet;
     private String description;
     private Integer status;

@@ -12,7 +12,7 @@ public class ProductRequest {
     private String code;
     private String barcode;
     private String name;
-    private Integer register;
+    private String register;
     private String planet;
     private String description;
     private BigDecimal price;
