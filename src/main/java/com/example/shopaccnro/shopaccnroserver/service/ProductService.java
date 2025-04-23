@@ -47,6 +47,8 @@ public class ProductService {
         product.setName(productRequest.getName());
         product.setPlanet(productRequest.getPlanet());
         product.setRegister(productRequest.getRegister());
+        product.setPrice(productRequest.getPrice());
+        product.setQuantity(productRequest.getQuantity());
         product.setStatus(1);
 
         // Set category
@@ -86,6 +88,8 @@ public class ProductService {
         product.setName(productRequest.getName());
         product.setPlanet(productRequest.getPlanet());
         product.setRegister(productRequest.getRegister());
+        product.setPrice(productRequest.getPrice());
+        product.setQuantity(productRequest.getQuantity());
 
         // Cập nhật danh mục
         if (productRequest.getCategoryId() != null) {
@@ -93,6 +97,46 @@ public class ProductService {
         } else {
             product.setCategory(null);
         }
+
+        // Set server
+        if (productRequest.getServerId() != null) {
+            product.setServer(Server.builder().id(productRequest.getServerId()).build());
+        } else {
+            product.setServer(null);
+        }
+
+        // Lưu sản phẩm
+        return productRepository.save(product);
+    }
+
+    public Product deleteProduct(Long id, ProductRequest productRequest) {
+        // Kiểm tra xem sản phẩm có tồn tại không
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (!optionalProduct.isPresent()) {
+            throw new RuntimeException("Product not found with id: " + id);
+        }
+        Product product = optionalProduct.get();
+        product.setStatus(0);
+
+        // Set server
+        if (productRequest.getServerId() != null) {
+            product.setServer(Server.builder().id(productRequest.getServerId()).build());
+        } else {
+            product.setServer(null);
+        }
+
+        // Lưu sản phẩm
+        return productRepository.save(product);
+    }
+
+    public Product resetStatus(Long id, ProductRequest productRequest) {
+        // Kiểm tra xem sản phẩm có tồn tại không
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (!optionalProduct.isPresent()) {
+            throw new RuntimeException("Product not found with id: " + id);
+        }
+        Product product = optionalProduct.get();
+        product.setStatus(1);
 
         // Set server
         if (productRequest.getServerId() != null) {

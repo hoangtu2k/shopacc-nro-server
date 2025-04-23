@@ -34,7 +34,8 @@ public class ProductRest {
                     productRequest.setName(product.getName());
                     productRequest.setPlanet(product.getPlanet());
                     productRequest.setRegister(product.getRegister());
-
+                    productRequest.setPrice(product.getPrice());
+                    productRequest.setQuantity(product.getQuantity());
                     productRequest.setDescription(product.getDescription());
                     productRequest.setStatus(product.getStatus());
                     
@@ -129,6 +130,26 @@ public class ProductRest {
             return ResponseEntity.ok(updatedProduct); // Trả về 200 OK và đối tượng sản phẩm đã cập nhật
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Trả về 404 Not Found nếu không tìm thấy sản phẩm
+        }
+    }
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id, @RequestBody ProductRequest request) {
+        try {
+            Product updatedProduct = productService.deleteProduct(id, request);
+            return ResponseEntity.ok(updatedProduct); // Returns 200 OK
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Returns 404 if not found
+        }
+    }
+
+    @PutMapping("/reset-status/{id}")
+    public ResponseEntity<Product> resetStatus(@PathVariable Long id, @RequestBody ProductRequest request) {
+        try {
+            Product updatedProduct = productService.resetStatus(id, request);
+            return ResponseEntity.ok(updatedProduct); // Returns 200 OK
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Returns 404 if not found
         }
     }
 

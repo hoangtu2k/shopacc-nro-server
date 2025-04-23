@@ -23,6 +23,8 @@ public class Product {
     private String name;
     private String register;
     private String planet;
+    private Integer quantity;
+    private BigDecimal price;
     private String description;
     private Integer status;
 
@@ -38,8 +40,5 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<ProductPhoto> productPhotos = new HashSet<ProductPhoto>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private Set<ProductDetails> productDetails = new HashSet<ProductDetails>();
 
 }
