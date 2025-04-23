@@ -51,6 +51,13 @@ public class ProductService {
         product.setQuantity(productRequest.getQuantity());
         product.setStatus(1);
 
+        // Set quantity
+        if (productRequest.getQuantity() != null) {
+            product.setQuantity(productRequest.getQuantity());
+        } else {
+            product.setQuantity(1);
+        }
+
         // Set category
         if (productRequest.getCategoryId() != null) {
             product.setCategory(Category.builder().id(productRequest.getCategoryId()).build());
@@ -89,7 +96,12 @@ public class ProductService {
         product.setPlanet(productRequest.getPlanet());
         product.setRegister(productRequest.getRegister());
         product.setPrice(productRequest.getPrice());
-        product.setQuantity(productRequest.getQuantity());
+        // Set quantity
+        if (productRequest.getQuantity() != null) {
+            product.setQuantity(productRequest.getQuantity());
+        } else {
+            product.setQuantity(1);
+        }
 
         // Cập nhật danh mục
         if (productRequest.getCategoryId() != null) {
