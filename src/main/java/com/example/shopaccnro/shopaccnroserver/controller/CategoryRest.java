@@ -1,11 +1,13 @@
 package com.example.shopaccnro.shopaccnroserver.controller;
 
 import com.example.shopaccnro.shopaccnroserver.entity.Category;
+import com.example.shopaccnro.shopaccnroserver.entity.Product;
 import com.example.shopaccnro.shopaccnroserver.request.AttributeProductRequest;
 import com.example.shopaccnro.shopaccnroserver.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,15 @@ public class CategoryRest {
             return ResponseEntity.noContent().build(); // Trả về 204 nếu không có người dùng
         }
         return ResponseEntity.ok(attributeProductReqs); // Trả về 200 và danh sách người dùng
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<Product>> getProductsByCategoryId(@PathVariable Long id) {
+        List<Product> products = categoryService.getProductsByCategoryId(id);
+        if (products.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(products);
     }
 
 }
